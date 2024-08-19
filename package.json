@@ -4,8 +4,8 @@
   "description": "Gilded Rose kata in TypeScript",
   "scripts": {
     "compile": "tsc --declaration",
-    "test": "mocha",
-    "dev:golden": "ts-node ./test/golden-master-text-test.spec.ts"
+    "test:mocha": "nyc mocha",
+    "test:text": "ts-node ./test/golden-master-text-test.ts"
   },
   "license": "MIT",
   "private": true,

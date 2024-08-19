@@ -1,7 +1,6 @@
-import { Item, GildedRose, UpdatedItem } from "../src/gilded-rose";
-import { expect } from "chai";
-import type { ItemProps } from "../src/gilded-rose";
+import { Item, GildedRose } from "../src/gilded-rose";
 
+// I don't really need another test here. This is just useful for giving a once-over
 console.log("OMGHAI!");
 
 const items = [
@@ -11,8 +10,8 @@ const items = [
   new Item("Sulfuras", 0, 80), //
   new Item("Sulfuras", -1, 80),
   new Item("Backstage passes", 15, 20),
-  new Item("Backstage passes", 10, 49),
-  new Item("Backstage passes", 5, 49),
+  new Item("Backstage passes", 10, 45),
+  new Item("Backstage passes", 5, 45),
   // this conjured item does not work properly yet
   new Item("Conjured Mana Cake", 3, 6),
 ];
@@ -34,14 +33,3 @@ for (let i = 0; i < days + 1; i++) {
   console.log();
   gildedRose.updateQuality();
 }
-
-// describe("The stuff we missed", () => {
-//   describe("Sulfurus", () => {
-//     it("Should never have a sellIn value other than 0", () => {
-//       const gildedRose = new GildedRose(items);
-//       expect(gildedRose.items[4].sellIn).to.equal(0);
-//       let updatedItems = gildedRose.updateQuality();
-//       expect(updatedItems[4].sellIn).to.equal(0);
-//     });
-//   });
-// });

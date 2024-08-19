@@ -1,57 +1,29 @@
 # Gilded Rose
 
-This is the Gilded Rose kata in TypeScript.
+Attempt at the Gilded Rose kata in TypeScript.
 
-## Getting started
+For the item class, I disliked that it was possible to input and save incorrect properties (e.g.
+quality = 90 or Sulfurus sellIn = -1) on Day 0. I also didn't feel it was Gilded Rose classes job to
+correct what should be intrinsic properties of the items.
 
-Install dependencies
+So my approach was to create two new classes/objects which implement the same interface:
 
-```sh
-npm install
-```
+1. UpdatedItem - Ensures that quality always stays between 0 and 50 inclusive
+2. Sulfuras - Freezes the properties for this particular legendary item
 
-## Run the unit tests from the Command-Line
+The Gilded rose class migrates any instances of the Item class upon initialisation with the new
+static method updateItems(). This is extra overhead to be sure, but it was the simplest way to
+ensure backwards compatibility.
 
-There are two unit test frameworks to choose from, Jest and Mocha.
+For the main GildedRose.updateQuality() method, my top priority was making it much smaller and more
+readable.
 
-```sh
-npm run test:jest
-```
+I implemented early returns on the atypical item types: Sulfuras, Aged Brie, and Backstage Passes.
+That shaved off a lot of unecessary ifs.
 
-To run all tests in watch mode
+And since this method was mostly about decision logic, I broke out the mathematical logic into a
+couple of new static of methods:
 
-```sh
-npm run test:jest:watch
-```
-
-Mocha
-
-```sh
-npm run test:mocha
-```
-
-
-## Run the TextTest fixture from the Command-Line
-
-_You may need to install `ts-node`_
-
-```sh
-npx ts-node test/golden-master-text-test.ts
-```
-
-Or with number of days as args:
-```sh
-npx ts-node test/golden-master-text-test.ts 10
-```
-
-You should make sure the command shown above works when you execute it in a terminal before trying to use TextTest (see below).
-
-
-## Run the TextTest srcroval test that comes with this project
-
-There are instructions in the [TextTest Readme](../texttests/README.md) for setting up TextTest. You will need to specify the Python executable and interpreter in [config.gr](../texttests/config.gr). Uncomment these lines:
-
-    executable:${TEXTTEST_HOME}/python/texttest_fixture.py
-    interpreter:python
-
+1. backstagePassQualityChange()
+2. standardQualityChange()
 
